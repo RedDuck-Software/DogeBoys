@@ -26,14 +26,14 @@ const Menu = (props) => {
         "https://bsc-dataseed.binance.org/"
       );
       // const dogeBoysAddress = '0x6d98ac849df87ce5cb1b15cc25df6199b252be65';
-      const dogeBoysAddress = '0x55d398326f99059ff775485246999027b3197955';
+      const dogeBoysAddress = '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c';
       const dogeBoysContract = new ethers.Contract(
         dogeBoysAddress,
         ERC20_INTERFACE,
         provider
       )
       const dogeBoysDecimals = await dogeBoysContract.decimals();
-      const busdAddress = '0xe9e7cea3dedca5984780bafc599bd69add087d56';
+      const busdAddress = '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d';
       const pancakeFactoryContract = new ethers.Contract(
         "0xca143ce32fe78f1f7019d7d551a6402fc5350c73",
         PANCAKE_FACTORY_ABI,
@@ -57,8 +57,8 @@ const Menu = (props) => {
       ]);
       const amountOutFull = await pancakeRouterContract.getAmountOut(
         ethers.utils.parseUnits("1", dogeBoysDecimals),
-        ethers.utils.parseUnits(`${_reserve0 }`),
-        ethers.utils.parseUnits(`${_reserve1 }`)
+        ethers.utils.parseUnits(`${_reserve1 }`),
+        ethers.utils.parseUnits(`${_reserve0 }`)
       );
       // @ts-ignore
       setCakePriceUsd((+amountOutFull / (+'1e18')));

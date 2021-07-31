@@ -1,6 +1,6 @@
 import React from "react";
+import { useWalletModal } from "@pancakeswap/uikit";
 import Button from "../../../components/Button/Button";
-import { useWalletModal } from "../../WalletModal";
 import { Login } from "../../WalletModal/types";
 
 interface Props {
