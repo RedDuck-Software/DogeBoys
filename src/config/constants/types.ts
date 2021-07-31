@@ -80,6 +80,7 @@ export interface PoolConfig {
 }
 
 export type Images = {
+  imagePath?: string
   lg: string
   md: string
   sm: string

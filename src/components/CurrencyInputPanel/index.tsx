@@ -76,30 +76,16 @@ export default function CurrencyInputPanel({
                                              id,
                                              showCommonBases,
                                            }: CurrencyInputPanelProps) {
-  const currentCurrency = currency || {
-    address: '0x6D98aC849Df87ce5Cb1b15CC25DF6199B252BE65',
-    chainId: 56,
-    decimals: 9,
-    name: 'DogeBoys',
-    symbol: 'DogeBoys',
-  }
-  const currectOtherCurrency = otherCurrency || {
-    address: '0x6D98aC849Df87ce5Cb1b15CC25DF6199B252BE65',
-    chainId: 56,
-    decimals: 9,
-    name: 'DogeBoys',
-    symbol: 'DogeBoys',
-  }
   const { account } = useActiveWeb3React()
-  const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currentCurrency ?? undefined)
+  const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
   const { t } = useTranslation()
   const translatedLabel = label || t('Input')
 
   const [onPresentCurrencyModal] = useModal(
     <CurrencySearchModal
       onCurrencySelect={onCurrencySelect}
-      selectedCurrency={currentCurrency}
-      otherSelectedCurrency={currectOtherCurrency}
+      selectedCurrency={currency}
+      otherSelectedCurrency={otherCurrency}
       showCommonBases={showCommonBases}
     />,
   )
@@ -112,7 +98,7 @@ export default function CurrencyInputPanel({
               <Text fontSize="14px">{translatedLabel}</Text>
               {account && (
                 <Text onClick={onMax} fontSize="14px" style={{ display: 'inline', cursor: 'pointer' }}>
-                  {!hideBalance && !!currentCurrency && selectedCurrencyBalance
+                  {!hideBalance && !!currency && selectedCurrencyBalance
                     ? t('Balance: %amount%', { amount: selectedCurrencyBalance?.toSignificant(6) ?? '' })
                     : ' -'}
                 </Text>
@@ -130,7 +116,7 @@ export default function CurrencyInputPanel({
                   onUserInput(val)
                 }}
               />
-              {account && currentCurrency && showMaxButton && label !== 'To' && (
+              {account && currency && showMaxButton && label !== 'To' && (
                 <Button onClick={onMax} scale="sm" variant="text">
                   MAX
                 </Button>
@@ -138,7 +124,7 @@ export default function CurrencyInputPanel({
             </>
           )}
           <CurrencySelectButton
-            selected={!!currentCurrency}
+            selected={!!currency}
             className="open-currency-select-button"
             onClick={() => {
               if (!disableCurrencySelect) {
@@ -149,8 +135,8 @@ export default function CurrencyInputPanel({
             <Flex alignItems="center" justifyContent="space-between">
               {pair ? (
                 <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={16} margin/>
-              ) : currentCurrency ? (
-                <CurrencyLogo currency={currentCurrency} size="24px" style={{ marginRight: '8px' }}/>
+              ) : currency ? (
+                <CurrencyLogo currency={currency} size="24px" style={{ marginRight: '8px' }}/>
               ) : null}
               {pair ? (
                 <Text id="pair">
@@ -158,12 +144,12 @@ export default function CurrencyInputPanel({
                 </Text>
               ) : (
                 <Text id="pair">
-                  {(currentCurrency && currentCurrency.symbol && currentCurrency.symbol.length > 20
-                    ? `${currentCurrency.symbol.slice(0, 4)}...${currentCurrency.symbol.slice(
-                      currentCurrency.symbol.length - 5,
-                      currentCurrency.symbol.length,
+                  {(currency && currency.symbol && currency.symbol.length > 20
+                    ? `${currency.symbol.slice(0, 4)}...${currency.symbol.slice(
+                      currency.symbol.length - 5,
+                      currency.symbol.length,
                     )}`
-                    : currentCurrency?.symbol) || t('Select a currency')}
+                    : currency?.symbol) || t('Select a currency')}
                 </Text>
               )}
               {!disableCurrencySelect && <ChevronDownIcon/>}
