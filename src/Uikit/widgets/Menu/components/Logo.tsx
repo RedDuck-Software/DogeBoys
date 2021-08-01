@@ -22,15 +22,15 @@ const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   .mobile-icon {
-    width: 32px;
-    ${({ theme }) => theme.mediaQueries.nav} {
+    width: 50px;
+    ${({ theme }) => theme.mediaQueries.sm} {
       display: none;
     }
   }
   .desktop-icon {
     width: 156px;
     display: none;
-    ${({ theme }) => theme.mediaQueries.nav} {
+    ${({ theme }) => theme.mediaQueries.md} {
       display: block;
     }
   }
@@ -52,8 +52,7 @@ const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, href }) => {
   const isAbsoluteUrl = href.startsWith("http");
   const innerLogo = (
     <>
-      <LogoIcon className="mobile-icon" />
-      <LogoWithText className="desktop-icon" isDark={isDark} />
+      <LogoIcon  />
     </>
   );
 

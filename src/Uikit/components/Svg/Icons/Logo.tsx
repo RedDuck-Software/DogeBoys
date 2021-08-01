@@ -1,11 +1,20 @@
 import React from "react";
-import Svg from "../Svg";
+import styled from 'styled-components'
 import { SvgProps } from "../types";
-import dogeBoys from "../../../../assets/images/dogeboys/ticker2_32x32.png"
+import headerLogo from "../../../../assets/images/dogeboys/headerLogo.png"
+
+const StyledImg = styled.img`
+  @media screen and (max-width: 576px) {
+      width: 90px;
+  }
+  @media screen and (min-width: 577px) {
+      width: 120px;
+  }
+`
 
 const Icon: React.FC<SvgProps> = (props) => {
   return (
-    <img src={dogeBoys} alt="" {...props}/>
+    <StyledImg src={headerLogo} alt="" {...props}/>
   );
 };
 
